@@ -5,8 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
     <link href="css/style.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="https://22901a9fe14d.us-east-1.captcha-sdk.awswaf.com/22901a9fe14d/jsapi.js"
+      defer
+    ></script>
   </head>
+
+  <script type="text/javascript">
+    function showMyCaptcha() {
+        var container = document.querySelector("#my-captcha-container");
+
+        AwsWafCaptcha.renderCaptcha(container, {
+            apiKey: "M4TbgGvGg0oUf9KdRAFBOdIzuI8i6j8nJSsmRZZePzdbc/kpWEqUea/v6AfzKGLnouhc9wc6hj2YcG09wcbdPD9a6lP1qLzLbI+c027qMhH89FVwwVfRp+iPEuRluUtfrpmRgXzdSFzojhj/oc1qSjdvEgSewApJjtcxruCtRhiM81ldjeaG+HKhJOeZMynJ25CUbJGHxCRz1j/ppcs34WRiP/rb7vgFalkf4bKT2AR1weRusNBmJvS2fFNm6GKSBUu2ZKDqfKgUSNmWtT/kN0qwnzCiCckzJ4rP91nSkuilim3eArt1hUGqibZSej5YfNtrkq9TTesQR71BWSXXx1X7O59mKDQ0TQ+yfhW5sNRABoelTDFciKKydJM8sHkXvzH3uTForAscpzn/N651dt+NsC0/LULlGfOqrEOwavS108VJMRYZ3dmH59UuNGo7NBbl/E/g9zPo+l+e0/1v7Xi/l0TBL1Epu7y/yWTxXyLEIDBafOmbRM+8qJJx6VOLa+K7yiFI1BhOHepivNthWxuFAM+CczwxIbwQxq+rR3769wxrl+ZcxahCnbHNYJ4GUlKtbozqs+x8U1r9vU6ZVqk2A3PIVZpDdJ56LDA4nVocsTJ+Qw0iDHFC9oVXSd+zxmBXQPMo6idwksYIzOmXqv2hACgDh7VFX9pOuOjSPuE=_0_1 ",
+            onSuccess: captchaExampleSuccessFunction,
+            onError: captchaExampleErrorFunction,
+            ...other configuration parameters as needed...
+        });
+    }
+
+    function captchaExampleSuccessFunction(wafToken) {
+        // Captcha completed. wafToken contains a valid WAF token. Store it for
+        // use later or call AwsWafIntegration.fetch() to use it easily.
+        // It will expire after a time, so calling AwsWafIntegration.getToken()
+        // again is advised if the token is needed later on, outside of using the
+        // fetch wrapper.
+
+        // Use WAF token to access protected resources
+        AwsWafIntegration.fetch("...WAF-protected URL...", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: "{ ... }" /* body content */
+        });
+    }
+
+    function captchaExampleErrorFunction(error) {
+        /* Do something with the error */
+    }
+  </script>
   <body>
+    <div id="my-captcha-container">
+      <!-- The contents of this container will be replaced by the captcha widget -->
+    </div>
     hell world
   </body>
 </html>
