@@ -27,7 +27,7 @@
     function captchaExampleSuccessFunction(wafToken) {
       console.log("all geod");
 
-      AwsWafIntegration.fetch("/login", {
+      AwsWafIntegration.fetch("login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
