@@ -24,6 +24,17 @@
       });
     }
 
+    function captchaExampleSuccessFunction(wafToken) {
+      AwsWafIntegration.fetch("...WAF-protected URL...", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: "{ ... }" /* body content */,
+      });
+    }
+
+    function captchaExampleErrorFunction(error) {}
     document.addEventListener("DOMContentLoaded", function () {
       showMyCaptcha();
     });
