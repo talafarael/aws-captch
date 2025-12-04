@@ -25,14 +25,29 @@
     }
 
     function captchaExampleSuccessFunction(wafToken) {
-      console.log("all geod");
-      AwsWafIntegration.fetch("...WAF-protected URL...", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      console.log("CAPTCHA пройдена, токен WAF:", wafToken);
+
+      fetch(
+        "https://rec-me-1749957718.us-east-1.elb.amazonaws.com/api/endpoint",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-amzn-waf-token": wafToken, // передаем токен CAPTCHA
+          },
+          body: JSON.stringify({
+            key1: "value1",
+            key2: "value2",
+          }),
         },
-        body: "{ ... }" /* body content */,
-      });
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Ответ сервера:", data);
+        })
+        .catch((error) => {
+          console.error("Ошибка запроса:", error);
+        });
     }
 
     function captchaExampleErrorFunction(error) {
