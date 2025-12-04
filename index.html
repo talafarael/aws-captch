@@ -25,7 +25,7 @@
     }
 
     function captchaExampleSuccessFunction(wafToken) {
-      console.log("all geod");
+      console.log("CAPTCHA verification successful");
 
       AwsWafIntegration.fetch(
         "https://22901a9fe14d.754b20b7.us-east-1.captcha.awswaf.com/22901a9fe14d/login",
@@ -35,9 +35,22 @@
             "Content-Type": "application/json",
             "x-waf-captcha-token": wafToken,
           },
-          body: JSON.stringify({ hell: "hell" }),
+          body: JSON.stringify({ data: "login" }),
         },
-      );
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Login successful:", data);
+        })
+        .catch((error) => {
+          console.error("Login request failed:", error);
+          captchaExampleErrorFunction(error);
+        });
     }
 
     function captchaExampleErrorFunction(error) {
