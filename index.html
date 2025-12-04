@@ -25,6 +25,7 @@
     }
 
     function captchaExampleSuccessFunction(wafToken) {
+      console.log("all geod");
       AwsWafIntegration.fetch("...WAF-protected URL...", {
         method: "POST",
         headers: {
@@ -34,7 +35,9 @@
       });
     }
 
-    function captchaExampleErrorFunction(error) {}
+    function captchaExampleErrorFunction(error) {
+      console.log("error");
+    }
     document.addEventListener("DOMContentLoaded", function () {
       showMyCaptcha();
     });
