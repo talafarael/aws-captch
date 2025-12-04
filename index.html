@@ -27,14 +27,17 @@
     function captchaExampleSuccessFunction(wafToken) {
       console.log("all geod");
 
-      AwsWafIntegration.fetch("login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-waf-captcha-token": wafToken,
+      AwsWafIntegration.fetch(
+        "https://22901a9fe14d.754b20b7.us-east-1.captcha.awswaf.com/22901a9fe14d/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-waf-captcha-token": wafToken,
+          },
+          body: JSON.stringify({ hell: "hell" }),
         },
-        body: JSON.stringify({ hell: "hell" }),
-      });
+      );
     }
 
     function captchaExampleErrorFunction(error) {
