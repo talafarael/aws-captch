@@ -31,8 +31,9 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-waf-captcha-token": wafToken,
         },
-        body: "{  'hell' :'hell'}" /* body content */,
+        body: JSON.stringify({ hell: "hell" }),
       });
     }
 
